@@ -1,0 +1,30 @@
+diff --git a/net/socket.c b/net/socket.c
+index 33e8b6c4e1d3..3cad6762ebf6 100644
+--- a/net/socket.c
++++ b/net/socket.c
+@@ -104,6 +104,7 @@
+ #include <linux/sockios.h>
+ #include <net/busy_poll.h>
+ #include <linux/errqueue.h>
++#include <linux/printk.h>
+ 
+ #ifdef CONFIG_NET_RX_BUSY_POLL
+ unsigned int sysctl_net_busy_read __read_mostly;
+@@ -1799,7 +1800,8 @@ SYSCALL_DEFINE4(accept4, int, fd, struct sockaddr __user *, upeer_sockaddr,
+ 
+ SYSCALL_DEFINE3(accept, int, fd, struct sockaddr __user *, upeer_sockaddr,
+ 		int __user *, upeer_addrlen)
+-{
++{   
++	printk("Hello from accept system call\n");
+ 	return __sys_accept4(fd, upeer_sockaddr, upeer_addrlen, 0);
+ }
+ 
+@@ -1859,6 +1861,7 @@ int __sys_connect(int fd, struct sockaddr __user *uservaddr, int addrlen)
+ SYSCALL_DEFINE3(connect, int, fd, struct sockaddr __user *, uservaddr,
+ 		int, addrlen)
+ {
++	printk("Hello from connect system call\n");
+ 	return __sys_connect(fd, uservaddr, addrlen);
+ }
+ 
